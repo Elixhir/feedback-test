@@ -1,0 +1,154 @@
+{
+  "info": {
+    "name": "Feedback Form System API",
+    "description": "Collection for testing the Flexible Multi-Language Feedback Form System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "System",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Forms",
+      "item": [
+        {
+          "name": "Get Forms",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/forms",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "forms"]
+            }
+          }
+        },
+        {
+          "name": "Create Form",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": {\n    \"en\": \"Customer Feedback\"\n  },\n  \"description\": {\n    \"en\": \"Help us improve\"\n  },\n  \"questions\": [\n    {\n      \"type\": \"text\",\n      \"text\": {\n        \"en\": \"How was your experience?\"\n      },\n      \"required\": true\n    },\n    {\n      \"type\": \"multiple_choice\",\n      \"text\": {\n        \"en\": \"How did you hear about us?\"\n      },\n      \"options\": [\n        {\"en\": \"Social Media\"},\n        {\"en\": \"Friends\"},\n        {\"en\": \"Google\"}\n      ],\n      \"required\": false\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/forms",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "forms"]
+            }
+          }
+        },
+        {
+          "name": "Update Form",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": {\n    \"en\": \"Updated Feedback\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/forms/FORM_ID",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "forms", "FORM_ID"]
+            }
+          }
+        },
+        {
+          "name": "Delete Form",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/forms/FORM_ID",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "forms", "FORM_ID"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Responses",
+      "item": [
+        {
+          "name": "Submit Response",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"form_id\": \"FORM_ID\",\n  \"user_id\": \"user123\",\n  \"language\": \"en\",\n  \"answers\": {\n    \"1\": \"Great!\",\n    \"2\": \"Social Media\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/responses",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "responses"]
+            }
+          }
+        },
+        {
+          "name": "Get Responses",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/responses/FORM_ID",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "responses", "FORM_ID"]
+            }
+          }
+        },
+        {
+          "name": "Get Analytics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/responses/FORM_ID/analytics",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "responses", "FORM_ID", "analytics"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
