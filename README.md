@@ -41,60 +41,60 @@ Auto-generated docs: `http://localhost:8000/docs`
 
 ---
 
-## Contratos de API por Consumidor
+## API Contracts by Consumer
 
 ### 🖥️ Backoffice (Admin)
 
-Administración de formularios y visualización de respuestas.
+Form administration and response visualization.
 
-| Método | Endpoint | Descripción |
+| Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/v1/forms` | Listar formularios (paginado, filtrar por status) |
-| GET | `/api/v1/forms?form_id={id}` | Obtener formulario por ID |
-| GET | `/api/v1/forms?form_id={id}&versions=true` | Ver historial de versiones |
-| POST | `/api/v1/forms` | Crear formulario |
-| PUT | `/api/v1/forms/{form_id}` | Actualizar formulario |
-| DELETE | `/api/v1/forms/{form_id}` | Archivar formulario |
-| GET | `/api/v1/responses/{form_id}` | Ver respuestas de un formulario |
-| GET | `/api/v1/responses/{form_id}/analytics` | Ver analytics |
+| GET | `/api/v1/forms` | List forms (paginated, filter by status) |
+| GET | `/api/v1/forms?form_id={id}` | Get form by ID |
+| GET | `/api/v1/forms?form_id={id}&versions=true` | View version history |
+| POST | `/api/v1/forms` | Create form |
+| PUT | `/api/v1/forms/{form_id}` | Update form |
+| DELETE | `/api/v1/forms/{form_id}` | Archive form |
+| GET | `/api/v1/responses/{form_id}` | View form responses |
+| GET | `/api/v1/responses/{form_id}/analytics` | View analytics |
 
-### App Web/Mobile (Usuario Final)
+### 📱 App Web/Mobile (End User)
 
-Envío de respuestas a formularios.
+Response submission to forms.
 
-| Método | Endpoint | Descripción |
+| Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/api/v1/forms?status=active` | Listar formularios activos |
-| GET | `/api/v1/forms?form_id={id}` | Obtener detalles de formulario |
-| POST | `/api/v1/responses` | Enviar respuesta |
+| GET | `/api/v1/forms?status=active` | List active forms |
+| GET | `/api/v1/forms?form_id={id}` | Get form details |
+| POST | `/api/v1/responses` | Submit response |
 
 ### System
 
-| Método | Endpoint | Descripción |
+| Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/` | Información de la API |
+| GET | `/` | API info |
 | GET | `/health` | Health check |
 
 ---
 
-## Ejemplos de Uso
+## Usage Examples
 
 ### Health Check
 ```bash
 curl http://localhost:8000/health
 ```
 
-### Listar formularios activos (App)
+### List active forms (App)
 ```bash
 curl "http://localhost:8000/api/v1/forms?status=active"
 ```
 
-### Obtener formulario (App)
+### Get form (App)
 ```bash
 curl "http://localhost:8000/api/v1/forms?form_id=form123"
 ```
 
-### Crear formulario (Backoffice)
+### Create form (Backoffice)
 ```bash
 curl -X POST "http://localhost:8000/api/v1/forms" \
   -H "Content-Type: application/json" \
@@ -112,19 +112,19 @@ curl -X POST "http://localhost:8000/api/v1/forms" \
   }'
 ```
 
-### Actualizar formulario (Backoffice)
+### Update form (Backoffice)
 ```bash
 curl -X PUT "http://localhost:8000/api/v1/forms/form123" \
   -H "Content-Type: application/json" \
   -d '{"title": {"en": "Updated Form"}}'
 ```
 
-### Archivar formulario (Backoffice)
+### Archive form (Backoffice)
 ```bash
 curl -X DELETE "http://localhost:8000/api/v1/forms/form123"
 ```
 
-### Enviar respuesta (App)
+### Submit response (App)
 ```bash
 curl -X POST "http://localhost:8000/api/v1/responses" \
   -H "Content-Type: application/json" \
@@ -136,57 +136,57 @@ curl -X POST "http://localhost:8000/api/v1/responses" \
   }'
 ```
 
-### Ver respuestas (Backoffice)
+### View responses (Backoffice)
 ```bash
 curl "http://localhost:8000/api/v1/responses/form123"
 ```
 
-### Ver analytics (Backoffice)
+### View analytics (Backoffice)
 ```bash
 curl "http://localhost:8000/api/v1/responses/form123/analytics"
 ```
 
 ---
 
-## Parámetros
+## Parameters
 
-### Paginación
-| Parámetro | Default | Máximo | Descripción |
-|-----------|---------|--------|-------------|
-| `page` | 1 | - | Página número |
-| `page_size` | 10 | 100 | Items por página |
+### Pagination
+| Parameter | Default | Max | Description |
+|-----------|---------|-----|-------------|
+| `page` | 1 | - | Page number |
+| `page_size` | 10 | 100 | Items per page |
 
-### Query Params para Forms
-| Parámetro | Tipo | Descripción |
+### Query Params for Forms
+| Parameter | Type | Description |
 |-----------|------|-------------|
-| `page` | int | Número de página |
-| `page_size` | int | Items por página |
-| `status` | string | Filtrar: active, archived, draft |
-| `form_id` | string | Obtener formulario específico |
-| `versions` | bool | true = devolver todas las versiones |
+| `page` | int | Page number |
+| `page_size` | int | Items per page |
+| `status` | string | Filter: active, archived, draft |
+| `form_id` | string | Get specific form |
+| `versions` | bool | true = return all versions |
 
 ---
 
-## Tipos de Pregunta Soportados
+## Supported Question Types
 
-- `text` - Texto libre
-- `multiple_choice` - Opción única
-- `rating` - Rating numérico
+- `text` - Free text
+- `multiple_choice` - Single choice
+- `rating` - Numeric rating
 - `boolean` - True/False
-- `date` - Fecha
-- `scale` - Valor numérico en rango
+- `date` - Date
+- `scale` - Numeric value in range
 
 ---
 
-## Estados de Formulario
+## Form Status
 
-- `active` - Formulario disponible
-- `archived` - Formulario archivado
-- `draft` - Borrador
+- `active` - Form available
+- `archived` - Form archived
+- `draft` - Draft
 
 ---
 
-## Idiomas Soportados
+## Supported Languages
 
 - `en` - English
 - `es` - Spanish

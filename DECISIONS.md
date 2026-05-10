@@ -49,9 +49,9 @@
 - Fast lookup by language
 
 **How to add more languages?**
-1. Add to `Language` enum in `domain/value_objects/language.py`:
+1. Add to `Language` enum in `domain/constants.py`:
    ```python
-   class Language(Enum):
+   class Language(str, Enum):
        EN = "en"
        ES = "es"
        FR = "fr"
